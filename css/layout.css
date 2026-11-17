@@ -1,0 +1,1461 @@
+/* ════════════════════════════════════════════════════════════════════
+   RAGNAROK: THE NEW WORLD — CSS ARCHITECTURE: LAYOUTS
+   Target: Single-Screen 5-Section Switcher (Home - Gameplay - Heros - Specs - Download)
+   Zero Outer Scrollbar · In-Place Section Transitions · Adaptive Desktop Experience
+════════════════════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────────
+   1. FIXED SINGLE-SCREEN STAGE (NO SCROLLBAR)
+────────────────────────────────────────── */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--color-bg-base);
+}
+
+.app-stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ──────────────────────────────────────────
+   2. PERSISTENT NAVIGATION (TOP BAR)
+────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  z-index: 1000;
+  background: linear-gradient(180deg, rgba(10, 18, 27, 0.88) 0%, rgba(10, 18, 27, 0.4) 65%, transparent 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(217, 182, 111, 0.15);
+  transition: background-color var(--duration-mid) var(--ease-smooth);
+}
+
+.nav__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: var(--space-4);
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.nav__logo-wrapper {
+  position: relative;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  transition: transform var(--duration-fast) var(--ease-smooth);
+}
+
+.nav__logo-wrapper:hover {
+  transform: scale(1.05);
+}
+
+.nav__logo-img {
+  height: 100%;
+  width: auto;
+  max-width: 110px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6));
+}
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--space-4), 2.5vw, var(--space-8));
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--color-ivory);
+  position: relative;
+  padding: var(--space-2) 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+.nav__link-star {
+  color: var(--color-gold);
+  font-size: 11px;
+  display: inline-block;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity var(--duration-fast) var(--ease-smooth), transform var(--duration-fast) var(--ease-smooth);
+}
+
+.nav__link:hover,
+.nav__link.nav__link--active {
+  color: var(--color-gold);
+}
+
+.nav__link:hover .nav__link-star,
+.nav__link.nav__link--active .nav__link-star {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.nav__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(16, 29, 43, 0.6);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-ivory);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-smooth), border-color var(--duration-fast) var(--ease-smooth), color var(--duration-fast) var(--ease-smooth);
+}
+
+.nav__icon-btn:hover {
+  background: rgba(20, 43, 64, 0.9);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+/* Top Nav Free Play Golden Pill Button (Inspired by Reference) */
+.nav__cta-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #FFE266 0%, #FFB800 50%, #E68D00 100%);
+  border: 1.5px solid #FFF5B8;
+  color: #1a1002;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(255, 184, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transition: transform var(--duration-fast) var(--ease-smooth),
+              box-shadow var(--duration-fast) var(--ease-smooth),
+              background var(--duration-fast) var(--ease-smooth);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.nav__cta-play:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 18px rgba(255, 184, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  background: linear-gradient(180deg, #FFF088 0%, #FFC726 50%, #F59C00 100%);
+}
+
+/* ──────────────────────────────────────────
+   3. IN-PLACE SECTION VIEW ARCHITECTURE
+────────────────────────────────────────── */
+.section-view {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(18px) scale(0.985);
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding-top: var(--nav-height);
+  overflow: hidden;
+}
+
+.section-view--active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transform: translateY(0) scale(1);
+  z-index: 2;
+}
+
+.section-view__inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.section-view-header {
+  text-align: center;
+  margin-bottom: clamp(10px, 1.8vh, 22px);
+}
+
+.section-view-header .eyebrow {
+  margin-bottom: 2px;
+}
+
+.section-view-header .section-title {
+  margin-bottom: 4px;
+  font-size: clamp(22px, 2.6vw, 36px);
+}
+
+.section-view-header .section-desc {
+  max-width: 65ch;
+  margin-inline: auto;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+/* ──────────────────────────────────────────
+   4. SECTION 1: HOME (OFFICIAL REPLICA)
+────────────────────────────────────────── */
+#section-home {
+  justify-content: space-between;
+  padding-bottom: 0;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: brightness(0.88) contrast(1.05);
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at center 50%, rgba(10, 18, 27, 0.1) 0%, rgba(10, 18, 27, 0.6) 80%),
+    linear-gradient(180deg, rgba(10, 18, 27, 0.45) 0%, transparent 35%, rgba(10, 18, 27, 0.8) 100%);
+  pointer-events: none;
+}
+
+/* ──────────────────────────────────────────
+   4. SECTION 1: HOME (FLOATING LOGO & GOLDEN CTA)
+────────────────────────────────────────── */
+.hero__center {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: 1040px;
+  padding-inline: var(--space-4);
+}
+
+/* Concentric Orbital Play Button (Watch Trailer Trigger) */
+.hero__play-wrap {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(6px, 1vh, 12px);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-smooth);
+}
+
+.hero__play-wrap:hover {
+  transform: scale(1.1);
+}
+
+.hero__play-orbit {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  animation: playOrbitRotate 12s linear infinite;
+}
+
+.hero__play-orbit-dot {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 8px #fff;
+}
+
+.hero__play-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(16, 29, 43, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.hero__play-wrap:hover .hero__play-btn {
+  background: rgba(20, 43, 64, 0.95);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  box-shadow: 0 0 20px rgba(217, 182, 111, 0.6);
+}
+
+.hero__play-icon {
+  width: 14px;
+  height: 14px;
+  margin-left: 2px;
+  fill: currentColor;
+}
+
+@keyframes playOrbitRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Floating Game Logo in Middle of Hero Section */
+.hero__floating-logo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(6px, 1.2vh, 14px);
+  z-index: 2;
+}
+
+.hero__floating-logo {
+  max-width: clamp(280px, 28vw, 440px);
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  animation: heroLogoFloat 4.8s ease-in-out infinite;
+  will-change: transform, filter;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@keyframes heroLogoFloat {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 35px rgba(217, 182, 111, 0.35));
+  }
+  50% {
+    transform: translateY(-9px);
+    filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 55px rgba(217, 182, 111, 0.6));
+  }
+}
+
+/* Special Fantasy Headline (Embossed Gold Typography with Drop Shadow) */
+.hero__tagline-special {
+  font-family: var(--font-special);
+  font-size: clamp(17px, 1.85vw, 27px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  text-align: center;
+  margin: 0 0 clamp(16px, 2.2vh, 26px) 0;
+  color: #FFE6A0;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF5D6 25%, #F7CE68 60%, #B88528 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 20px rgba(217, 182, 111, 0.5));
+  max-width: 900px;
+}
+
+/* High-Impact Golden Call to Action & Trust Bar */
+.hero__cta-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 4;
+}
+
+/* Vibrant Golden Pill Download Button (Inspired by Reference Screenshot) */
+.btn-download-gold {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: clamp(54px, 5.6vh, 64px);
+  padding: 0 clamp(32px, 3.2vw, 56px);
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #FFE46B 0%, #FFB600 45%, #E68D00 100%);
+  border: 2px solid #FFF5B8;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: visible;
+  animation: btnPulseGlow 3s ease-in-out infinite;
+  transition: transform var(--duration-fast) var(--ease-smooth),
+              background var(--duration-fast) var(--ease-smooth),
+              border-color var(--duration-fast) var(--ease-smooth);
+}
+
+.btn-download-gold::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 50%;
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  transform: skewX(-25deg);
+  animation: btnShimmerSweep 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes btnShimmerSweep {
+  0% {
+    left: -120%;
+  }
+  32%, 100% {
+    left: 200%;
+  }
+}
+
+@keyframes btnPulseGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 24px rgba(255, 184, 0, 0.5),
+      0 10px 25px rgba(0, 0, 0, 0.65),
+      inset 0 2px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -3px 4px rgba(180, 95, 0, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 0 52px rgba(255, 184, 0, 0.88),
+      0 0 85px rgba(255, 215, 80, 0.4),
+      0 14px 35px rgba(0, 0, 0, 0.75),
+      inset 0 2px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -3px 4px rgba(180, 95, 0, 0.5);
+  }
+}
+
+.btn-download-gold:hover {
+  transform: translateY(-3px) scale(1.03);
+  background: linear-gradient(180deg, #FFF088 0%, #FFC726 45%, #F59C00 100%);
+  border-color: #FFFFFF;
+}
+
+.btn-download-gold:active {
+  transform: translateY(1px) scale(0.985);
+  box-shadow:
+    0 0 20px rgba(255, 184, 0, 0.6),
+    0 4px 12px rgba(0, 0, 0, 0.7),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.btn-download-gold__text {
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.25vw, 19px);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a1002;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  line-height: 1;
+}
+
+.btn-download-gold__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1002;
+  line-height: 1;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.5));
+  transition: transform var(--duration-fast) var(--ease-smooth);
+}
+
+.btn-download-gold:hover .btn-download-gold__icon {
+  transform: scale(1.15);
+}
+
+/* Downward Pointer Tab under CTA Button */
+.btn-download-gold__arrow {
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 9px solid #E68D00;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45));
+  transition: transform var(--duration-fast) var(--ease-smooth),
+              border-top-color var(--duration-fast) var(--ease-smooth);
+}
+
+.btn-download-gold:hover .btn-download-gold__arrow {
+  transform: translateX(-50%) translateY(2px);
+  border-top-color: #F59C00;
+}
+
+/* Live Proof / Trust Pill Bar */
+.hero__proof-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 14px);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(10, 18, 27, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
+}
+
+.proof-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: clamp(11px, 0.95vw, 12px);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.proof-item--badge {
+  background: #0078D7;
+  color: #FFFFFF;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 5px;
+  gap: 5px;
+}
+
+.proof-win-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.proof-divider {
+  width: 1px;
+  height: 13px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.proof-item--rating {
+  gap: 4px;
+}
+
+.proof-stars {
+  color: #FFB800;
+  letter-spacing: 1px;
+  font-size: 11px;
+  filter: drop-shadow(0 0 4px rgba(255, 184, 0, 0.5));
+}
+
+.proof-score {
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.proof-item--online {
+  color: rgba(233, 227, 211, 0.9);
+  font-weight: 500;
+}
+
+.pulse-green-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulseGreenDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseGreenDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 6px #22c55e;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.65;
+    box-shadow: 0 0 12px #22c55e;
+  }
+}
+
+.proof-item--players {
+  font-weight: 700;
+  color: #FFDE6A;
+  letter-spacing: 0.03em;
+}
+
+.hero__bottom-bar {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 var(--container-padding) var(--space-4);
+  box-sizing: border-box;
+}
+
+.hero__socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.hero__social-link {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ivory);
+  opacity: 0.7;
+  transition: opacity var(--duration-fast) var(--ease-smooth), color var(--duration-fast) var(--ease-smooth);
+}
+
+.hero__social-link:hover {
+  opacity: 1;
+  color: var(--color-gold);
+}
+
+.hero__social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.hero__more-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-secondary);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  font-family: inherit;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+.hero__more-info:hover {
+  color: var(--color-gold);
+}
+
+.hero__mouse-icon {
+  width: 18px;
+  height: 28px;
+  border: 1.5px solid currentColor;
+  border-radius: 12px;
+  position: relative;
+}
+
+.hero__mouse-wheel {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 5px;
+  background-color: currentColor;
+  border-radius: 2px;
+  animation: mouseWheelScroll 1.8s ease-in-out infinite;
+}
+
+@keyframes mouseWheelScroll {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  60% {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+}
+
+.hero__copyright {
+  text-align: right;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.05em;
+}
+
+/* ──────────────────────────────────────────
+   5. SECTION 2: GAMEPLAY (INTERACTIVE SHOWCASE)
+────────────────────────────────────────── */
+#section-gameplay {
+  background: radial-gradient(circle at center, #142b40 0%, #0a121b 85%);
+}
+
+.gameplay-stage {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: var(--space-6);
+  width: 100%;
+  align-items: center;
+}
+
+.gameplay-viewer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 540px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--color-gold-border);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  background: #000;
+}
+
+.gameplay-viewer__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease, transform 0.6s var(--ease-cinematic);
+}
+
+.gameplay-viewer__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-4) var(--space-5);
+  background: linear-gradient(180deg, transparent 0%, rgba(10, 18, 27, 0.95) 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.gameplay-viewer__title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-ivory);
+  margin-bottom: 4px;
+}
+
+.gameplay-viewer__desc {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  max-width: 52ch;
+}
+
+.gameplay-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gameplay-cat-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: rgba(16, 29, 43, 0.6);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  text-align: left;
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.gameplay-cat-btn:hover,
+.gameplay-cat-btn--active {
+  background: rgba(20, 43, 64, 0.95);
+  border-color: var(--color-gold);
+  transform: translateX(6px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+.gameplay-cat-btn__thumb {
+  width: 56px;
+  height: 38px;
+  border-radius: 2px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--color-border-subtle);
+}
+
+.gameplay-cat-btn__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.gameplay-cat-btn__tag {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.gameplay-cat-btn__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ivory);
+}
+
+/* ──────────────────────────────────────────
+   6. SECTION 3: HEROS (CHARACTER STAGE WITH OFFICIAL ASSETS)
+────────────────────────────────────────── */
+#section-heros {
+  background-image: url('../Asset/Background Section Character.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.heros-stage {
+  display: grid;
+  grid-template-columns: 140px 1fr 340px;
+  gap: var(--space-6);
+  width: 100%;
+  align-items: center;
+  height: calc(100vh - var(--nav-height) - 40px);
+}
+
+.heros-icons-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.heros-icons-column::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-icon-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 6px;
+  background: rgba(16, 29, 43, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 30px;
+  cursor: pointer;
+  outline: none;
+  font: inherit;
+  width: 100%;
+  text-align: left;
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.hero-icon-btn:hover,
+.hero-icon-btn--active {
+  background: rgba(217, 182, 111, 0.2);
+  border-color: var(--color-gold);
+  transform: translateX(4px);
+}
+
+.hero-icon-btn__img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.hero-icon-btn__name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-ivory);
+  letter-spacing: 0.04em;
+}
+
+/* Hero Center Artwork Frame */
+.hero-center-art {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.hero-center-art__img {
+  max-height: 72vh;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.75));
+  animation: heroBreathe 6s ease-in-out infinite;
+}
+
+@keyframes heroBreathe {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.heros-arrows-nav {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  gap: var(--space-4);
+  z-index: 10;
+}
+
+.heros-arrow-btn {
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  transition: transform var(--duration-fast) var(--ease-smooth);
+}
+
+.heros-arrow-btn:hover {
+  transform: scale(1.15);
+}
+
+.heros-arrow-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Hero Right Info Card */
+.hero-info-card {
+  background: rgba(16, 29, 43, 0.88);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.hero-info-card__role {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.hero-info-card__name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.hero-info-card__desc {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.hero-info-card__stats-title {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-top: 6px;
+}
+
+.hero-stats-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero-stat-row {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--color-ivory);
+}
+
+.hero-stat-bar-track {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.hero-stat-bar-fill {
+  height: 100%;
+  background: var(--color-gold);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.hero-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.hero-skill-pill {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
+  background: rgba(20, 43, 64, 0.7);
+  border: 1px solid var(--color-gold-border);
+  color: var(--color-gold);
+}
+
+.hero-info-card .btn--primary {
+  margin-top: 4px;
+  width: 100%;
+}
+
+/* ──────────────────────────────────────────
+   7. SECTION 4: SYSTEM REQUIREMENTS
+────────────────────────────────────────── */
+#section-requirements {
+  background: radial-gradient(circle at center, #101d2b 0%, #0a121b 90%);
+}
+
+.requirements__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  max-width: 1080px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.req-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+}
+
+.req-card--recommended {
+  border-color: var(--color-gold-border);
+  background: rgba(20, 43, 64, 0.75);
+}
+
+.req-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.req-card__badge {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  background: var(--color-gold-subtle);
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold-border);
+}
+
+.req-card__title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-ivory);
+}
+
+.req-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.req-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: var(--space-3);
+  font-size: 12px;
+  align-items: baseline;
+}
+
+.req-row__label {
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.req-row__value {
+  color: var(--color-ivory);
+  font-weight: 400;
+}
+
+.requirements__note {
+  margin-top: var(--space-4);
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+/* ──────────────────────────────────────────
+   8. SECTION 5: DOWNLOAD (GRAND FINALE)
+────────────────────────────────────────── */
+#section-download {
+  background-image: url('../Asset/Gamplay 14.jpg');
+  background-size: cover;
+  background-position: center;
+  justify-content: space-between;
+  padding-bottom: 0;
+}
+
+.download-backdrop-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(16, 29, 43, 0.45) 0%, rgba(10, 18, 27, 0.95) 85%),
+    linear-gradient(180deg, var(--color-bg-base) 0%, transparent 20%, transparent 80%, var(--color-bg-base) 100%);
+  z-index: 1;
+}
+
+.download-center {
+  position: relative;
+  z-index: 3;
+  max-width: 860px;
+  margin-inline: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+}
+
+.download-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.2vw, 64px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-ivory);
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-4);
+}
+
+.download-desc {
+  font-size: var(--fs-body);
+  color: var(--color-ivory-dim);
+  line-height: var(--lh-body);
+  margin-bottom: var(--space-6);
+  max-width: 56ch;
+  margin-inline: auto;
+}
+
+.download-steam-cta {
+  display: inline-flex;
+  margin-bottom: var(--space-5);
+}
+
+/* Platform Badges Row */
+.download-stores-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+/* Compact Footer */
+.footer-compact {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding-block: var(--space-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 18, 27, 0.94);
+}
+
+.footer-compact__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+.footer-compact__copy {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  max-width: 75ch;
+  text-align: left;
+}
+
+/* ──────────────────────────────────────────
+   9. SIDE DOT PAGINATION (5 SECTIONS)
+────────────────────────────────────────── */
+.side-nav {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 990;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.side-nav__dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid transparent;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.side-nav__dot:hover {
+  background: var(--color-gold);
+  transform: scale(1.25);
+}
+
+.side-nav__dot.side-nav__dot--active {
+  background: var(--color-gold);
+  box-shadow: 0 0 10px var(--color-gold);
+  height: 24px;
+  border-radius: 12px;
+}
+
+.side-nav__tooltip {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 4px 10px;
+  background: rgba(16, 29, 43, 0.92);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--radius-xs);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ivory);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-smooth);
+}
+
+.side-nav__dot:hover .side-nav__tooltip {
+  opacity: 1;
+}
+
+/* ──────────────────────────────────────────
+   10. TRAILER VIDEO MODAL
+────────────────────────────────────────── */
+.trailer-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--duration-mid) var(--ease-smooth), visibility var(--duration-mid) var(--ease-smooth);
+}
+
+.trailer-modal.trailer-modal--open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.trailer-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 18, 27, 0.94);
+  backdrop-filter: blur(18px);
+}
+
+.trailer-modal__container {
+  position: relative;
+  z-index: 2;
+  width: 90vw;
+  max-width: 1200px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--color-gold-border);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85);
+}
+
+.trailer-modal__video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.trailer-modal__close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  font-size: 24px;
+  color: var(--color-ivory);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+.trailer-modal__close:hover {
+  color: var(--color-gold);
+}
+
+/* ──────────────────────────────────────────
+   11. RESPONSIVE ADAPTATIONS
+────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .heros-stage {
+    grid-template-columns: 100px 1fr 280px;
+  }
+}
+
+@media (max-width: 900px) {
+  .gameplay-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .heros-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-info-card {
+    display: none;
+  }
+
+  .requirements__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav__menu {
+    display: none;
+  }
+
+  .hero__proof-bar {
+    padding: 6px 12px;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .btn-download-gold {
+    padding: 0 24px;
+    min-height: 50px;
+  }
+
+  .hero__proof-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 16px;
+    gap: 6px 10px;
+    padding: 8px 12px;
+  }
+
+  .nav__cta-play {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+}

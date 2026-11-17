@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Ragnarok: The New World — Official PC Edition on Steam. Free-to-play open-world MMORPG. Master legendary classes, conquer tactical raids, and explore Midgard on desktop PC.">
+  <meta name="keywords"
+    content="Ragnarok The New World, Ragnarok PC, MMORPG Steam, Gravity, Midgard, PC Gaming, Free to Play MMORPG">
+  <meta name="theme-color" content="#101D2B">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ragnarok: The New World — Official PC Gaming Experience">
+  <meta property="og:description" content="Rediscover a legend reborn for desktop PC. Free to play on Steam.">
+  <meta property="og:image" content="Asset/Gamplay 14.jpg">
+
+  <title data-i18n="meta.title">Ragnarok: The New World — Official PC Edition · Play Free on Steam</title>
+
+  <!-- Google Fonts Preconnect & High-Fidelity Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Modular CSS Architecture -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+  <!-- Background Theme Music Player -->
+  <audio id="bgAudio" loop preload="auto"
+    src="Asset/Ragnarok- The New World Official Site - Launching on All Platforms July 16!.mp3"></audio>
+
+  <!-- ═══════════════════════════════════════════
+       PERSISTENT TOP NAVIGATION (OFFICIAL REPLICA)
+  ════════════════════════════════════════════ -->
+  <header class="nav" id="mainNav" role="banner">
+    <div class="nav__container container">
+
+      <!-- Logo & Brand Mark -->
+      <a class="nav__brand js-go-section" data-section-target="0" href="#section-home" data-i18n-aria="a11y.logo"
+        aria-label="Ragnarok: The New World Logo">
+        <div class="nav__logo-wrapper">
+          <img class="nav__logo-img" src="Asset/logo ragnarok.png" alt="Ragnarok: The New World" width="96" height="48">
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu (Exactly 5 Sections) -->
+      <nav class="nav__menu" aria-label="Primary Navigation">
+        <button class="nav__link nav__link--active" type="button" data-section-target="0">
+          <span class="nav__link-star">✦</span>
+          <span data-i18n="nav.home">Home</span>
+        </button>
+        <button class="nav__link" type="button" data-section-target="1">
+          <span class="nav__link-star">✦</span>
+          <span data-i18n="nav.gameplay">Gameplay</span>
+        </button>
+        <button class="nav__link" type="button" data-section-target="2">
+          <span class="nav__link-star">✦</span>
+          <span data-i18n="nav.heros">Heros</span>
+        </button>
+        <button class="nav__link" type="button" data-section-target="3">
+          <span class="nav__link-star">✦</span>
+          <span data-i18n="nav.requirements">System Requirements</span>
+        </button>
+        <button class="nav__link" type="button" data-section-target="4">
+          <span class="nav__link-star">✦</span>
+          <span data-i18n="nav.download">Download</span>
+        </button>
+      </nav>
+
+      <!-- Actions: Language Selector & Audio Toggle -->
+      <div class="nav__actions">
+
+        <!-- Desktop Language Selector (EN, ID, TH, ZH, FR) -->
+        <div class="lang-selector">
+          <button class="nav__icon-btn lang-selector__trigger" type="button" aria-haspopup="listbox"
+            aria-expanded="false" title="Change Language" aria-label="Change Language">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+              </path>
+            </svg>
+          </button>
+          <ul class="lang-selector__dropdown" role="listbox">
+            <li><button class="lang-selector__option lang-selector__option--active" type="button" role="option"
+                data-lang="en">English</button></li>
+            <li><button class="lang-selector__option" type="button" role="option" data-lang="id">Bahasa
+                Indonesia</button></li>
+            <li><button class="lang-selector__option" type="button" role="option" data-lang="th">ภาษาไทย</button></li>
+            <li><button class="lang-selector__option" type="button" role="option" data-lang="zh-CN">简体中文</button></li>
+            <li><button class="lang-selector__option" type="button" role="option" data-lang="fr">Français</button></li>
+          </ul>
+        </div>
+
+        <!-- Audio Mute / Unmute Toggle Button -->
+        <button class="nav__icon-btn" id="audioToggleBtn" type="button" title="Play Sound" aria-label="Toggle Sound">
+          <svg class="icon-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+          <svg class="icon-unmuted" style="display: none;" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+        </button>
+
+        <!-- Top Nav Primary CTA Button (Inspired by Screenshot) -->
+        <a class="nav__cta-play" href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/"
+          data-steam-cta="nav_play_now" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="nav.play_now">PLAY NOW — FREE</span>
+        </a>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════
+       SINGLE-SCREEN STAGE (5 IN-PLACE SECTIONS)
+  ════════════════════════════════════════════ -->
+  <main class="app-stage" id="appStage">
+
+    <!-- ──────────────────────────────────────────
+         SECTION 1: HOME (OFFICIAL REPLICA)
+    ────────────────────────────────────────── -->
+    <section class="section-view section-view--active" id="section-home" data-section-index="0"
+      aria-label="Official Game Release">
+
+      <!-- Looping Background Video -->
+      <div class="hero__media" aria-hidden="true">
+        <video class="hero__video" autoplay muted loop playsinline poster="">
+          <source src="Asset/Hero Section video.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- Atmospheric Cinematic Overlay -->
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <!-- Center Stage Elements -->
+      <div class="hero__center">
+
+        <!-- Floating Game Logo in Center with Ambient Glow & Float Animation -->
+        <div class="hero__floating-logo-wrap">
+          <img class="hero__floating-logo" src="Asset/logo ragnarok.png" alt="Ragnarok: The New World" width="460"
+            height="264">
+        </div>
+
+        <!-- Special Fantasy Headline with Gold Embossing & Drop Shadow -->
+        <h1 class="hero__tagline-special" data-i18n="hero.tagline">Master Legendary Classes. Conquer Midgard on PC.</h1>
+
+        <!-- High-Impact Golden Call to Action & Trust Bar -->
+        <div class="hero__cta-container">
+          <a class="btn-download-gold" href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/"
+            data-steam-cta="hero_main_download" target="_blank" rel="noopener noreferrer">
+            <span class="btn-download-gold__text" data-i18n="hero.btn.download">DOWNLOAD FOR WINDOWS</span>
+            <span class="btn-download-gold__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+                <path
+                  d="M0 3.449L9.75 2.1v9.451H0V3.449zm10.949-1.63L24 0v11.551H10.949V1.819zM0 12.651h9.75V22.1L0 20.751v-8.1zm10.949 0H24V24l-13.051-1.819V12.651z" />
+              </svg>
+            </span>
+            <div class="btn-download-gold__arrow" aria-hidden="true"></div>
+          </a>
+
+          <!-- Live Proof / Trust Pill Bar -->
+          <div class="hero__proof-bar">
+            <span class="proof-item proof-item--badge">
+              <svg class="proof-win-icon" viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                <path
+                  d="M0 3.449L9.75 2.1v9.451H0V3.449zm10.949-1.63L24 0v11.551H10.949V1.819zM0 12.651h9.75V22.1L0 20.751v-8.1zm10.949 0H24V24l-13.051-1.819V12.651z" />
+              </svg>
+              <span data-i18n="hero.proof.platform">Windows PC Exclusive</span>
+            </span>
+            <span class="proof-divider" aria-hidden="true"></span>
+            <span class="proof-item proof-item--rating">
+              <span class="proof-stars" aria-hidden="true">★★★★★</span>
+              <span class="proof-score">4.9</span>
+            </span>
+            <span class="proof-divider" aria-hidden="true"></span>
+            <span class="proof-item proof-item--online">
+              <span class="pulse-green-dot" aria-hidden="true"></span>
+              <span data-i18n="hero.proof.online">26,402 Online Now</span>
+            </span>
+            <span class="proof-divider" aria-hidden="true"></span>
+            <span class="proof-item proof-item--players">
+              <span class="proof-count" data-i18n="hero.proof.players">15M+ Players</span>
+            </span>
+          </div>
+
+    </section>
+
+
+    <!-- ──────────────────────────────────────────
+         SECTION 2: GAMEPLAY (INTERACTIVE SHOWCASE)
+    ────────────────────────────────────────── -->
+    <section class="section-view" id="section-gameplay" data-section-index="1" aria-label="Gameplay Showcase">
+      <div class="section-view__inner">
+
+        <header class="section-view-header">
+          <span class="eyebrow" data-i18n="features.eyebrow">Core Experience</span>
+          <h2 class="section-title" data-i18n="features.title">Crafted for Desktop MMORPG Players</h2>
+          <p class="section-desc" data-i18n="features.desc">
+            Built from the ground up for high-resolution PC displays, precise controls, and deep multiplayer systems.
+          </p>
+        </header>
+
+        <div class="gameplay-stage">
+
+          <!-- Large Interactive Viewer -->
+          <div class="gameplay-viewer" id="gameplayViewer">
+            <img class="gameplay-viewer__img" id="gameplayViewerImg" src="Asset/Gamplay 2.jpg"
+              alt="Raid Boss Tactical Combat">
+            <div class="gameplay-viewer__overlay">
+              <div>
+                <h3 class="gameplay-viewer__title" id="gameplayViewerTitle" data-i18n="feature.combat.title">Tactical
+                  Real-Time Boss Battles</h3>
+                <p class="gameplay-viewer__desc" id="gameplayViewerDesc" data-i18n="feature.combat.desc">
+                  Coordinate with party members to evade devastating AoE attacks, break boss shields, and unleash
+                  synchronised class ultimates in high-stakes raid dungeons.
+                </p>
+              </div>
+              <button class="btn btn--ghost btn--sm" id="gameplayExpandBtn" type="button"
+                aria-label="View Fullscreen Screenshot">
+                <span>EXPAND</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Vertical Category Tabs -->
+          <div class="gameplay-categories" id="gameplayCategoryList">
+
+            <!-- Category 1: Raid Bosses -->
+            <button class="gameplay-cat-btn gameplay-cat-btn--active" type="button" data-index="0"
+              data-img="Asset/Gamplay 2.jpg" data-tag="Combat" data-title="Tactical Real-Time Boss Battles"
+              data-desc="Coordinate with party members to evade devastating AoE attacks, break boss shields, and unleash synchronised class ultimates in high-stakes raid dungeons.">
+              <img class="gameplay-cat-btn__thumb" src="Asset/Gamplay 2.jpg" alt="Combat">
+              <div class="gameplay-cat-btn__text">
+                <span class="gameplay-cat-btn__tag" data-i18n="feature.combat.tag">Combat</span>
+                <span class="gameplay-cat-btn__title" data-i18n="feature.combat.title">Tactical Real-Time Boss
+                  Battles</span>
+              </div>
+            </button>
+
+            <!-- Category 2: Open World -->
+            <button class="gameplay-cat-btn" type="button" data-index="1" data-img="Asset/Gamplay 5.jpg"
+              data-tag="Exploration" data-title="Seamless Living World"
+              data-desc="Scale city ramparts, swim through sunlit coastal bays, and soar above starlit mountain ranges in a vibrant world designed for boundless curiosity.">
+              <img class="gameplay-cat-btn__thumb" src="Asset/Gamplay 5.jpg" alt="Exploration">
+              <div class="gameplay-cat-btn__text">
+                <span class="gameplay-cat-btn__tag" data-i18n="feature.world.tag">Exploration</span>
+                <span class="gameplay-cat-btn__title" data-i18n="feature.world.title">Seamless Living World</span>
+              </div>
+            </button>
+
+            <!-- Category 3: Guild Wars -->
+            <button class="gameplay-cat-btn" type="button" data-index="2" data-img="Asset/Gamplay 1.jpg"
+              data-tag="Guild Wars" data-title="Guild Occupation & Sieges"
+              data-desc="Clash with rival guilds for territorial domination, strategic fortresses, and coveted regional glory in large-scale organized desktop PvP battles.">
+              <img class="gameplay-cat-btn__thumb" src="Asset/Gamplay 1.jpg" alt="Guild Wars">
+              <div class="gameplay-cat-btn__text">
+                <span class="gameplay-cat-btn__tag" data-i18n="feature.pvp.tag">Guild Wars</span>
+                <span class="gameplay-cat-btn__title" data-i18n="feature.pvp.title">Guild Occupation & Sieges</span>
+              </div>
+            </button>
+
+            <!-- Category 4: Economy -->
+            <button class="gameplay-cat-btn" type="button" data-index="3" data-img="Asset/Gamplay 8.webp"
+              data-tag="Economy" data-title="Thriving Player-Driven Market"
+              data-desc="Set up personal storefronts in Prontera, craft rare equipment, gather resources across wild zones, and influence a truly player-managed trade economy.">
+              <img class="gameplay-cat-btn__thumb" src="Asset/Gamplay 8.webp" alt="Economy">
+              <div class="gameplay-cat-btn__text">
+                <span class="gameplay-cat-btn__tag" data-i18n="feature.economy.tag">Economy</span>
+                <span class="gameplay-cat-btn__title" data-i18n="feature.economy.title">Thriving Player-Driven
+                  Market</span>
+              </div>
+            </button>
+
+            <!-- Category 5: Wardrobe -->
+            <button class="gameplay-cat-btn" type="button" data-index="4" data-img="Asset/Gamplay 9.webp"
+              data-tag="Wardrobe" data-title="Limitless Customization"
+              data-desc="Express your unique aesthetic with thousands of costume combinations, distinct hairstyles, collectible pet companions, cosmetic wings, and majestic mounts.">
+              <img class="gameplay-cat-btn__thumb" src="Asset/Gamplay 9.webp" alt="Wardrobe">
+              <div class="gameplay-cat-btn__text">
+                <span class="gameplay-cat-btn__tag" data-i18n="feature.custom.tag">Wardrobe</span>
+                <span class="gameplay-cat-btn__title" data-i18n="feature.custom.title">Limitless Customization</span>
+              </div>
+            </button>
+
+            <!-- Category 6: Community & Life -->
+            <button class="gameplay-cat-btn" type="button" data-index="5" data-img="Asset/Gamplay 4.jpg"
+              data-tag="Community" data-title="Rich Social & Life Systems"
+              data-desc="Celebrate milestone moments with companions, partake in seasonal city festivals, forge lasting friendships, and create unforgettable memories beyond the battlefield.">
+              <img class="gameplay-cat-btn__thumb" src="Asset/Gamplay 4.jpg" alt="Community">
+              <div class="gameplay-cat-btn__text">
+                <span class="gameplay-cat-btn__tag" data-i18n="feature.social.tag">Community</span>
+                <span class="gameplay-cat-btn__title" data-i18n="feature.social.title">Rich Social & Life Systems</span>
+              </div>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────
+         SECTION 3: HEROS (CHARACTER SHOWCASE)
+    ────────────────────────────────────────── -->
+    <section class="section-view" id="section-heros" data-section-index="2" aria-label="Hero Class Showcase">
+      <div class="section-view__inner">
+
+        <div class="heros-stage">
+
+          <!-- Left Column: 8 Official Class Icons -->
+          <div class="heros-icons-column" id="herosIconColumn">
+            <!-- 1. Swordsman -->
+            <button class="hero-icon-btn hero-icon-btn--active" type="button" data-hero-index="0"
+              title="Swordsman Class">
+              <img class="hero-icon-btn__img" src="Asset/Swordman Icon Actif.webp" alt="Swordsman">
+              <span class="hero-icon-btn__name">Swordsman</span>
+            </button>
+            <!-- 2. Mage -->
+            <button class="hero-icon-btn" type="button" data-hero-index="1" title="Mage Class">
+              <img class="hero-icon-btn__img" src="Asset/Mage Icone Inactif.webp" alt="Mage">
+              <span class="hero-icon-btn__name">Mage</span>
+            </button>
+            <!-- 3. Archer -->
+            <button class="hero-icon-btn" type="button" data-hero-index="2" title="Archer Class">
+              <img class="hero-icon-btn__img" src="Asset/Archi Icone Inactif.webp" alt="Archer">
+              <span class="hero-icon-btn__name">Archer</span>
+            </button>
+            <!-- 4. Thief -->
+            <button class="hero-icon-btn" type="button" data-hero-index="3" title="Thief Class">
+              <img class="hero-icon-btn__img" src="Asset/Theif Icone Inactif.webp" alt="Thief">
+              <span class="hero-icon-btn__name">Thief</span>
+            </button>
+            <!-- 5. Acolyte -->
+            <button class="hero-icon-btn" type="button" data-hero-index="4" title="Acolyte Class">
+              <img class="hero-icon-btn__img" src="Asset/Acolyte Icone Inactif.webp" alt="Acolyte">
+              <span class="hero-icon-btn__name">Acolyte</span>
+            </button>
+            <!-- 6. Merchant -->
+            <button class="hero-icon-btn" type="button" data-hero-index="5" title="Merchant Class">
+              <img class="hero-icon-btn__img" src="Asset/Merchant  Icone Inactif.webp" alt="Merchant">
+              <span class="hero-icon-btn__name">Merchant</span>
+            </button>
+            <!-- 7. Gunslinger -->
+            <button class="hero-icon-btn" type="button" data-hero-index="6" title="Gunslinger Class">
+              <img class="hero-icon-btn__img" src="Asset/Gunslinger Icone Inactif.webp" alt="Gunslinger">
+              <span class="hero-icon-btn__name">Gunslinger</span>
+            </button>
+            <!-- 8. Druid -->
+            <button class="hero-icon-btn" type="button" data-hero-index="7" title="Druid Class">
+              <img class="hero-icon-btn__img" src="Asset/Druid Icone Inactif.webp" alt="Druid">
+              <span class="hero-icon-btn__name">Druid</span>
+            </button>
+          </div>
+
+          <!-- Center Column: Character Artwork & Arrows -->
+          <div class="hero-center-art">
+            <img class="hero-center-art__img" id="heroCharArt" src="Asset/Swordman Character.webp"
+              alt="Swordsman Hero Character">
+
+            <div class="heros-arrows-nav">
+              <button class="heros-arrow-btn" id="heroPrevBtn" type="button" aria-label="Previous Class">
+                <img src="Asset/Flech Left.webp" alt="Previous">
+              </button>
+              <button class="heros-arrow-btn" id="heroNextBtn" type="button" aria-label="Next Class">
+                <img src="Asset/Flech Right.webp" alt="Next">
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Hero Profile Card -->
+          <div class="hero-info-card">
+            <span class="hero-info-card__role" id="heroCharRole" data-i18n="class.swordsman.role">Frontline Tank &amp;
+              Vanguard</span>
+            <h3 class="hero-info-card__name" id="heroCharName" data-i18n="class.swordsman.name">Swordsman</h3>
+            <p class="hero-info-card__desc" id="heroCharDesc" data-i18n="class.swordsman.desc">
+              Steadfast defenders of the realm equipped with heavy armor, crowd-control warcries, and devastating melee
+              burst combinations.
+            </p>
+
+            <span class="hero-info-card__stats-title">Combat Attributes</span>
+            <div class="hero-stats-bars">
+              <div class="hero-stat-row">
+                <span>ATK</span>
+                <div class="hero-stat-bar-track">
+                  <div class="hero-stat-bar-fill" id="statAtk" style="width: 85%;"></div>
+                </div>
+              </div>
+              <div class="hero-stat-row">
+                <span>DEF</span>
+                <div class="hero-stat-bar-track">
+                  <div class="hero-stat-bar-fill" id="statDef" style="width: 95%;"></div>
+                </div>
+              </div>
+              <div class="hero-stat-row">
+                <span>RNG</span>
+                <div class="hero-stat-bar-track">
+                  <div class="hero-stat-bar-fill" id="statRng" style="width: 30%;"></div>
+                </div>
+              </div>
+              <div class="hero-stat-row">
+                <span>MOB</span>
+                <div class="hero-stat-bar-track">
+                  <div class="hero-stat-bar-fill" id="statMob" style="width: 60%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <span class="hero-info-card__stats-title">Signature Skills</span>
+            <div class="hero-skills-list" id="heroSkillsList">
+              <span class="hero-skill-pill">Magnum Break</span>
+              <span class="hero-skill-pill">Bash</span>
+              <span class="hero-skill-pill">Iron Defense</span>
+              <span class="hero-skill-pill">Endure</span>
+            </div>
+
+            <a class="btn btn--primary btn--sm"
+              href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/" data-steam-cta="hero_class_cta"
+              target="_blank" rel="noopener noreferrer">
+              <span data-i18n="nav.cta">Play on Steam</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────
+         SECTION 4: SYSTEM REQUIREMENTS
+    ────────────────────────────────────────── -->
+    <section class="section-view" id="section-requirements" data-section-index="3" aria-label="PC System Requirements">
+      <div class="section-view__inner">
+
+        <header class="section-view-header">
+          <span class="eyebrow" data-i18n="req.eyebrow">Verified Technical Specifications</span>
+          <h2 class="section-title" data-i18n="req.title">PC System Requirements</h2>
+          <p class="section-desc" data-i18n="req.desc">
+            Verified against the official Steam store page. Ensure your desktop gaming hardware is primed for the
+            optimal
+            graphical experience.
+          </p>
+        </header>
+
+        <div class="requirements__grid">
+
+          <!-- Minimum Specifications Card -->
+          <div class="req-card">
+            <div class="req-card__header">
+              <h3 class="req-card__title" data-i18n="req.min.title">Minimum Requirements</h3>
+              <span class="req-card__badge" data-i18n="req.min.badge">1080p · 30 FPS</span>
+            </div>
+
+            <div class="req-specs">
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.os.label">Operating System</span>
+                <span class="req-row__value" data-i18n="req.min.os">Windows 10 64-bit</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.cpu.label">Processor</span>
+                <span class="req-row__value" data-i18n="req.min.cpu">Intel Core i5-4460 / AMD FX-6300</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.ram.label">Memory</span>
+                <span class="req-row__value" data-i18n="req.min.ram">8 GB RAM</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.gpu.label">Graphics</span>
+                <span class="req-row__value" data-i18n="req.min.gpu">NVIDIA GeForce GTX 1050 (3GB) / AMD Radeon RX
+                  570</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.dx.label">DirectX</span>
+                <span class="req-row__value" data-i18n="req.min.dx">Version 11</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.network.label">Network</span>
+                <span class="req-row__value" data-i18n="req.min.network">Broadband Internet connection</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.storage.label">Storage</span>
+                <span class="req-row__value" data-i18n="req.min.storage">20 GB available space</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recommended Specifications Card -->
+          <div class="req-card req-card--recommended">
+            <div class="req-card__header">
+              <h3 class="req-card__title" data-i18n="req.rec.title">Recommended Requirements</h3>
+              <span class="req-card__badge" data-i18n="req.rec.badge">1080p - 1440p · 60+ FPS</span>
+            </div>
+
+            <div class="req-specs">
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.os.label">Operating System</span>
+                <span class="req-row__value" data-i18n="req.rec.os">Windows 10 / 11 64-bit</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.cpu.label">Processor</span>
+                <span class="req-row__value" data-i18n="req.rec.cpu">Intel Core i7-7700 / AMD Ryzen 5 2600</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.ram.label">Memory</span>
+                <span class="req-row__value" data-i18n="req.rec.ram">16 GB RAM</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.gpu.label">Graphics</span>
+                <span class="req-row__value" data-i18n="req.rec.gpu">NVIDIA GeForce GTX 1660 / AMD Radeon RX 5600
+                  XT</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.dx.label">DirectX</span>
+                <span class="req-row__value" data-i18n="req.rec.dx">Version 11</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.network.label">Network</span>
+                <span class="req-row__value" data-i18n="req.rec.network">Broadband Internet connection</span>
+              </div>
+              <div class="req-row">
+                <span class="req-row__label" data-i18n="req.storage.label">Storage</span>
+                <span class="req-row__value" data-i18n="req.rec.storage">20 GB available space (SSD Recommended)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="requirements__note" data-i18n="req.note">
+          * Specifications verified from the official Ragnarok: The New World Steam Store page. An active internet
+          connection is required to play.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────
+         SECTION 5: DOWNLOAD (GRAND FINALE)
+    ────────────────────────────────────────── -->
+    <section class="section-view" id="section-download" data-section-index="4" aria-label="Play on Steam">
+      <div class="download-backdrop-overlay" aria-hidden="true"></div>
+
+      <div class="download-center">
+        <span class="eyebrow" data-i18n="cta.eyebrow">Your Desktop Adventure Begins</span>
+
+        <h2 class="download-title" data-i18n="cta.title">YOUR ADVENTURE BEGINS IN MIDGARD.</h2>
+
+        <p class="download-desc" data-i18n="cta.desc">
+          Join millions of desktop players worldwide. Free to download and free to play on Steam. Download today and
+          claim your place in legend.
+        </p>
+
+        <div class="download-steam-cta">
+          <a class="btn btn--steam btn--xl" href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/"
+            data-steam-cta="download_primary" data-i18n-aria="a11y.steam.link" target="_blank"
+            rel="noopener noreferrer">
+            <span data-i18n="cta.button">PLAY ON STEAM</span>
+            <span class="btn__steam-tag">PC FREE</span>
+          </a>
+        </div>
+
+        <div class="download-stores-grid">
+          <a class="platform-btn" href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/"
+            target="_blank" rel="noopener noreferrer">
+            <div class="platform-btn__icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M0 3.449L9.75 2.1v9.451H0V3.449zm10.949-1.63L24 0v11.551H10.949V1.819zM0 12.651h9.75V22.1L0 20.751v-8.1zm10.949 0H24V24l-13.051-1.819V12.651z" />
+              </svg>
+            </div>
+            <div class="platform-btn__text">
+              <span class="platform-btn__main">Windows 64-bit</span>
+            </div>
+          </a>
+
+          <a class="platform-btn" href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/"
+            target="_blank" rel="noopener noreferrer">
+            <div class="platform-btn__icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658a3.39 3.39 0 0 1 1.954-.613c.092 0 .183.004.274.011l3.228-4.686a3.896 3.896 0 0 1-.035-.516c0-2.158 1.75-3.908 3.908-3.908s3.908 1.75 3.908 3.908-1.75 3.908-3.908 3.908c-.08 0-.159-.003-.238-.008l-4.606 3.284a3.385 3.385 0 0 1 .054.58c0 1.88-1.524 3.404-3.404 3.404a3.41 3.41 0 0 1-3.344-2.825L.536 17.8C2.593 21.465 6.985 24 11.979 24 18.607 24 24 18.607 24 11.979S18.607 0 11.979 0z" />
+              </svg>
+            </div>
+            <div class="platform-btn__text">
+              <span class="platform-btn__main">Steam Deck Verified</span>
+            </div>
+          </a>
+
+          <a class="platform-btn" href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/"
+            target="_blank" rel="noopener noreferrer">
+            <div class="platform-btn__icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <div class="platform-btn__text">
+              <span class="platform-btn__main">Cross-Progression</span>
+            </div>
+          </a>
+        </div>
+
+        <p style="font-size: 11px; color: var(--color-text-muted); letter-spacing: 0.1em; text-transform: uppercase;"
+          data-i18n="cta.meta">
+          Free to Play · PC Desktop · Windows Client via Steam
+        </p>
+      </div>
+
+      <!-- Integrated Compact Footer on Download Screen -->
+      <footer class="footer-compact" id="footer" role="contentinfo">
+        <div class="container footer-compact__inner">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="Asset/logo ragnarok.png" alt="Ragnarok: The New World" width="60" height="30"
+              style="object-fit: contain;">
+            <span
+              style="font-size: 11px; color: var(--color-gold); letter-spacing: 0.12em; text-transform: uppercase;">Official
+              PC Edition</span>
+          </div>
+          <p class="footer-compact__copy" data-i18n="footer.disclosure">
+            Affiliate Disclosure: This landing page is an independent affiliate and fan website created for desktop
+            gaming promotion. All game content, artwork, character names, trademarks, and logos are the property of
+            Gravity Co., Ltd. and their respective partners. Clicking outbound store links redirects to the official
+            Steam PC store page.
+          </p>
+          <div style="font-size: 11px; color: var(--color-text-muted);">
+            &copy; 2026 Gravity Co., Ltd.
+          </div>
+        </div>
+      </footer>
+
+    </section>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════
+       SIDE VERTICAL DOT NAVIGATION (5 SECTIONS)
+  ════════════════════════════════════════════ -->
+  <aside class="side-nav" aria-label="Section Navigation">
+    <button class="side-nav__dot side-nav__dot--active" type="button" data-section-target="0" aria-label="Go to Home">
+      <span class="side-nav__tooltip" data-i18n="nav.home">Home</span>
+    </button>
+    <button class="side-nav__dot" type="button" data-section-target="1" aria-label="Go to Gameplay">
+      <span class="side-nav__tooltip" data-i18n="nav.gameplay">Gameplay</span>
+    </button>
+    <button class="side-nav__dot" type="button" data-section-target="2" aria-label="Go to Heros">
+      <span class="side-nav__tooltip" data-i18n="nav.heros">Heros</span>
+    </button>
+    <button class="side-nav__dot" type="button" data-section-target="3" aria-label="Go to System Requirements">
+      <span class="side-nav__tooltip" data-i18n="nav.requirements">System Requirements</span>
+    </button>
+    <button class="side-nav__dot" type="button" data-section-target="4" aria-label="Go to Download">
+      <span class="side-nav__tooltip" data-i18n="nav.download">Download</span>
+    </button>
+  </aside>
+
+
+  <!-- ═══════════════════════════════════════════
+       OFFICIAL TRAILER VIDEO MODAL
+  ════════════════════════════════════════════ -->
+  <div class="trailer-modal" id="trailerModal" role="dialog" aria-modal="true" aria-hidden="true"
+    aria-label="Trailer Video Player">
+    <div class="trailer-modal__backdrop"></div>
+    <div class="trailer-modal__container">
+      <button class="trailer-modal__close" type="button" aria-label="Close Video">✕</button>
+      <video class="trailer-modal__video" controls preload="metadata" poster="Asset/Hero Section Video.mp4">
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       INTERACTIVE LIGHTBOX MODAL (GAMEPLAY EXPAND)
+  ════════════════════════════════════════════ -->
+  <div class="lightbox" id="lightboxModal" role="dialog" aria-modal="true" aria-hidden="true"
+    aria-label="Image Preview Dialog">
+    <div class="lightbox__backdrop"></div>
+
+    <div class="lightbox__container">
+      <button class="lightbox__btn lightbox__btn--close" type="button" data-i18n-aria="lightbox.close"
+        aria-label="Close (Esc)">
+        ✕
+      </button>
+
+      <button class="lightbox__btn lightbox__btn--prev" type="button" data-i18n-aria="lightbox.prev"
+        aria-label="Previous Image (←)">
+        <span class="lightbox__chevron lightbox__chevron--prev" aria-hidden="true"></span>
+      </button>
+
+      <div class="lightbox__media-wrap">
+        <img class="lightbox__img" src="" alt="">
+      </div>
+
+      <button class="lightbox__btn lightbox__btn--next" type="button" data-i18n-aria="lightbox.next"
+        aria-label="Next Image (→)">
+        <span class="lightbox__chevron lightbox__chevron--next" aria-hidden="true"></span>
+      </button>
+
+      <div class="lightbox__caption"></div>
+      <div class="lightbox__counter"></div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       SCRIPT ARCHITECTURE
+  ════════════════════════════════════════════ -->
+  <!-- 1. Translation Dictionaries -->
+  <script src="js/i18n/en.js"></script>
+  <script src="js/i18n/id.js"></script>
+  <script src="js/i18n/th.js"></script>
+  <script src="js/i18n/zh-CN.js"></script>
+  <script src="js/i18n/fr.js"></script>
+
+  <!-- 2. Core Functional Modules -->
+  <script src="js/language.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
